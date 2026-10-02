@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
+<g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity=".8">
+<path d="M55 218C150 140 255 115 420 90"/>
+<path d="M55 218l42-12 15-29 20 22 52-15 50-54 30 46 105-23"/>
+<path d="M210 151l-22-57 14-9 45 57"/>
+<path d="M320 126l58 20 22-6"/>
+</g>
+<path d="M35 230c120-12 240-15 420-90" fill="none" stroke="#dbeafe" stroke-width="4" stroke-dasharray="10 14"/>
+</svg>

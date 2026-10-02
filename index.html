@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Планировщик путешествий</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-scene"></div>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">Travel<span>Plan</span></div>
+      <nav class="nav">
+        <button class="active" data-page="dashboard">🏠 Главная</button>
+        <button data-page="routes">🗺️ Маршруты</button>
+        <button data-page="points">📍 Точки</button>
+        <button data-page="notes">📝 Заметки</button>
+        <button data-page="profile">👤 Профиль</button>
+      </nav>
+      <div class="sidebar-bottom">Планировщик путешествий<br>Локальная версия</div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 id="pageTitle">Планировщик путешествий</h1>
+          <div class="subtitle">Создавайте маршруты, сохраняйте точки и планируйте поездки.</div>
+        </div>
+        <div class="profile"><div class="avatar">П</div><b id="profileTopName">Путешественник</b></div>
+      </div>
+
+      <section class="page active" id="dashboard">
+        <div class="hero">
+          <div>
+            <h2>Ваше путешествие начинается здесь ✈️</h2>
+            <p>Добавляйте маршруты, отмечайте интересные места, рассчитывайте время и бюджет.</p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card stat"><div class="stat-label">Маршрутов</div><div class="stat-value" id="statRoutes">0</div></div>
+          <div class="card stat"><div class="stat-label">Точек</div><div class="stat-value" id="statPoints">0</div></div>
+          <div class="card stat"><div class="stat-label">Общее время</div><div class="stat-value" id="statTime">0 ч</div></div>
+          <div class="card stat"><div class="stat-label">Бюджет</div><div class="stat-value" id="statCost">0 ₽</div></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="card-title"><h2>Последние маршруты</h2><button class="btn btn-primary" onclick="openPage('routes')">Все маршруты</button></div>
+            <div id="dashboardRoutes"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><h2>Быстрые действия</h2></div>
+            <div class="form">
+              <button class="btn btn-primary" onclick="openPage('routes')">＋ Создать маршрут</button>
+              <button class="btn btn-light" onclick="openPage('points')">＋ Добавить точку</button>
+              <button class="btn btn-light" onclick="openPage('notes')">＋ Добавить заметку</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="routes">
+        <div class="grid">
+          <div class="card">
+            <div class="card-title"><h2>Мои маршруты</h2></div>
+            <div id="routesList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><h2>Новый маршрут</h2></div>
+            <form class="form" id="routeForm">
+              <div><label>Название маршрута</label><input id="routeName" required placeholder="Например: Путешествие по Санкт-Петербургу"></div>
+              <div class="row">
+                <div><label>Дата</label><input id="routeDate" type="date"></div>
+                <div><label>Время, часов</label><input id="routeTime" type="number" min="0" step="0.5" value="1"></div>
+              </div>
+              <div><label>Стоимость, ₽</label><input id="routeCost" type="number" min="0" step="1" value="0"></div>
+              <div><label>Описание</label><textarea id="routeDescription" placeholder="Кратко опишите маршрут..."></textarea></div>
+              <div class="actions"><button class="btn btn-primary">Создать маршрут</button></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="points">
+        <div class="grid">
+          <div class="card">
+            <div class="card-title"><h2>Точки путешествий</h2></div>
+            <div id="pointsList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><h2>Добавить точку</h2></div>
+            <form class="form" id="pointForm">
+              <div><label>Название</label><input id="pointName" required placeholder="Эйфелева башня"></div>
+              <div><label>Место / адрес</label><input id="pointPlace" placeholder="Париж, Франция"></div>
+              <div class="row">
+                <div><label>Время, минут</label><input id="pointTime" type="number" min="0" value="60"></div>
+                <div><label>Стоимость, ₽</label><input id="pointCost" type="number" min="0" value="0"></div>
+              </div>
+              <div><label>Заметка</label><textarea id="pointNote" placeholder="Что нужно посмотреть или не забыть..."></textarea></div>
+              <div class="actions"><button class="btn btn-primary">Добавить точку</button></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="notes">
+        <div class="grid">
+          <div class="card">
+            <div class="card-title"><h2>Мои заметки</h2></div>
+            <div id="notesList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><h2>Новая заметка</h2></div>
+            <form class="form" id="noteForm">
+              <div><label>Заголовок</label><input id="noteTitle" required placeholder="Что взять с собой"></div>
+              <div><label>Текст</label><textarea id="noteText" required placeholder="Паспорт, зарядка, фотоаппарат..."></textarea></div>
+              <div class="actions"><button class="btn btn-primary">Сохранить</button></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="profile">
+        <div class="card profile-box">
+          <div class="card-title"><h2>Профиль</h2></div>
+          <form class="form" id="profileForm">
+            <div><label>Имя</label><input id="profileName" value="Путешественник"></div>
+            <div><label>Email</label><input id="profileEmail" type="email" placeholder="example@mail.ru"></div>
+            <div><label>Валюта</label><select id="profileCurrency"><option>₽</option><option>€</option><option>$</option></select></div>
+            <div class="actions"><button class="btn btn-primary">Сохранить профиль</button></div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
